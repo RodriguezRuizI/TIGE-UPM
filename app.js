@@ -1,5 +1,5 @@
 var express = require('express');
-var	bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var path = require('path');
 
