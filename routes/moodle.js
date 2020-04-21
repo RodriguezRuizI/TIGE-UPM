@@ -23,7 +23,6 @@ request(options, (error, response, body) => {
         try {
         var response = JSON.parse(body);
         console.log(response)
-        console.log("HOLA")
         } catch (e) {
         // An error has occured, handle it, by e.g. logging it
         var msgAlert="Error al conectar. Compruebe URL.";
