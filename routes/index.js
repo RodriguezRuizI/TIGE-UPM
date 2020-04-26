@@ -12,4 +12,5 @@ router.about = function(req, res){
 router.courses = function(req, res){
   res.render('courses', { title: 'MWDEX' });
 };
+
 module.exports = router;

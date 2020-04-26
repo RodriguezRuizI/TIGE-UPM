@@ -22,7 +22,6 @@ request(options, (error, response, body) => {
         // Print out the response body
         try {
         var response = JSON.parse(body);
-        console.log(response)
         } catch (e) {
         // An error has occured, handle it, by e.g. logging it
         var msgAlert="Error al conectar. Compruebe URL.";
@@ -30,8 +29,6 @@ request(options, (error, response, body) => {
         console.log("Bad Url");
         }
         var myToken = response.token;
-        console.log(body);
-        console.log(myToken);
         if(myToken==undefined){
             var msgAlert="Error. Compruebe Usuario y Contraseña";
             res.render ('index',{msgAlert:msgAlert});    
@@ -54,12 +51,10 @@ request(options, (error, response, body) => {
                     var courses=JSON.parse(body);
                     var arrayCourses=[];
                     console.log(courses);
-                    } catch (e) {
-                        // An error has occured, handle it, by e.g. logging it
-                        res.send ("Error al conectar");
-                        console.log("Bad Url");
-                    }
-                    
+                    if (courses.errorcode=="accessexception"){
+                        var msgAlert="Error. No tiene los permisos necesarios de acceso";
+                        res.render ('index',{msgAlert:msgAlert}); 
+                    }else{
                     for(let course of courses) {
 
                         console.log(`${course.id} - ${course.shortname}_${course.fullname}`);
@@ -70,6 +65,12 @@ request(options, (error, response, body) => {
                         
                     }
                     res.render('courses',{token:myToken,url:req.body.url,array:arrayCourses});     
+                    }
+                    } catch (e) {
+                        // An error has occured, handle it, by e.g. logging it
+                        res.send ("Error al conectar");
+                        console.log("Bad Url");
+                    }
                 }
                 else{
                     var msgAlert="Error al conectar con Moodle. Compruebe la dirección web";

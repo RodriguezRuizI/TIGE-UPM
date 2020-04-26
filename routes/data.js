@@ -19,12 +19,14 @@ exports.getInfo = async (req, res) => {
         const arrayDataJson = await getMatchJson(array)
         if(req.query.check=="excel"){
             const path = await getExcelFromArray(arrayDataUser);
-            res.download(path, 'notas.xlsx');
+            res.render('sucess');
+            //res.download(path, 'notas.xlsx');
         }else{
             const path = await getJsonFromArray(arrayData[3], arrayDataJson)
             await jsonfile.writeFile('notas.json', path, function (err) {
                 if (err) console.error(err)
-                res.download('notas.json')
+                res.render('sucess');
+                //res.download('notas.json')
             })
         }
     } catch (error) {
