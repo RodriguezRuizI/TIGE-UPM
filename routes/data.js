@@ -13,7 +13,7 @@ exports.getInfo = async (req, res) => {
         const arrayData = await getGradesReport(req.query.url, req.query.token, req.query.workshopid);
         let array = [arrayUsers, arrayData[0], arrayData[1], arrayData[2]];
         if(arrayData.length==0){
-            res.render('error');
+            res.render('vacio');
         }
         const arrayDataUser = await getMatchData(array);
         const arrayDataJson = await getMatchJson(array)

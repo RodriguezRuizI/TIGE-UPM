@@ -9,8 +9,5 @@ router.index = function(req, res){
 router.about = function(req, res){
   res.render('about', { title: 'MWDEX' });
 };
-router.courses = function(req, res){
-  res.render('courses', { title: 'MWDEX' });
-};
 
 module.exports = router;
