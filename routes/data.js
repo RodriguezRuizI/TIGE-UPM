@@ -13,19 +13,19 @@ exports.getInfo = async (req, res) => {
         const arrayData = await getGradesReport(req.query.url, req.query.token, req.query.workshopid);
         let array = [arrayUsers, arrayData[0], arrayData[1], arrayData[2]];
         if(arrayData.length==0){
-            res.render('vacio');
+            res.render('empty');
         }
         const arrayDataUser = await getMatchData(array);
         const arrayDataJson = await getMatchJson(array)
         if(req.query.check=="excel"){
             const path = await getExcelFromArray(arrayDataUser);
-            res.render('sucess');
+            res.render('success');
             //res.download(path, 'notas.xlsx');
         }else{
             const path = await getJsonFromArray(arrayData[3], arrayDataJson)
             await jsonfile.writeFile('notas.json', path, function (err) {
                 if (err) console.error(err)
-                res.render('sucess');
+                res.render('success');
                 //res.download('notas.json')
             })
         }
